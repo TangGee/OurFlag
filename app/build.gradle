@@ -63,6 +63,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
+    implementation project(":network")
+    implementation project(":service")
+
     Map<String, String> dependencies = rootProject.ext.dependencies
     implementation dependencies.androidx.appCompat
     implementation dependencies.androidx.constraintLayout
