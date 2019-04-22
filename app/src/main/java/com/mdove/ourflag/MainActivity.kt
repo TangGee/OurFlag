@@ -1,7 +1,6 @@
 package com.mdove.ourflag
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -18,10 +17,9 @@ import com.mdove.ourflag.plan.NoDoneTaskFragment
 import com.mdove.ourflag.plan.viewmodel.ShortPlanViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AbsActivity() {
     private lateinit var viewModel: ShortPlanViewModel
-    private lateinit var DEFAULT_TITILE: ArrayList<String>
+    private lateinit var DEFAULT_TITILES: ArrayList<String>
     @SuppressLint("RestrictedApi")
     private val evaluator = ArgbEvaluator()
     private lateinit var DEFAULT_INDICATOR_COLORS: ArrayList<Int>
@@ -46,7 +44,7 @@ class MainActivity : AbsActivity() {
     }
 
     private fun initData() {
-        DEFAULT_TITILE = arrayListOf(getString(R.string.string_title_no_done_task_fragment),
+        DEFAULT_TITILES = arrayListOf(getString(R.string.string_title_no_done_task_fragment),
                 getString(R.string.string_title_today_task_fragment))
         DEFAULT_INDICATOR_COLORS = arrayListOf(ContextCompat.getColor(this, R.color.indicator_start_color), ContextCompat.getColor(this, R.color.indicator_end_color))
 
@@ -55,7 +53,7 @@ class MainActivity : AbsActivity() {
     }
 
     private fun initViewPager() {
-        view_pager?.adapter = ViewPagerAdapter(DEFAULT_TITILE, supportFragmentManager)
+        view_pager?.adapter = ViewPagerAdapter(DEFAULT_TITILES, supportFragmentManager)
         val pageChangeListener = object : ViewPager.OnPageChangeListener {
             var pageSelected = false
 
@@ -84,7 +82,7 @@ class MainActivity : AbsActivity() {
                 colors.add(DEFAULT_INDICATOR_COLORS[index % DEFAULT_INDICATOR_COLORS.size])
             }
         }
-        tabs.setViewPager(view_pager, DEFAULT_TITILE, DEFAULT_INDICATOR_COLORS)
+        tabs.setViewPager(view_pager, DEFAULT_TITILES, DEFAULT_INDICATOR_COLORS)
     }
 
     class ViewPagerAdapter(val categoryList: List<String>, private val fm: FragmentManager) : FragmentPagerAdapter(fm) {

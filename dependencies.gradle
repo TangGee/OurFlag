@@ -46,7 +46,9 @@ ext {
             'rxJava'                : 'io.reactivex.rxjava2:rxjava:2.1.0',
             'okhttp3'               : 'com.squareup.okhttp3:okhttp:3.2.0',
             'gson'                  : 'com.google.code.gson:gson:2.7',
-
+            'mmkv'                  : [
+                    'core': 'com.tencent:mmkv:1.0.19'
+            ],
             'dagger'                : [
                     'core'     : "com.google.dagger:dagger:$dagger",
                     'compiler' : "com.google.dagger:dagger-compiler:$dagger",
