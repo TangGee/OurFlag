@@ -16,6 +16,7 @@ import com.mdove.ourflag.base.AbsActivity
 import com.mdove.ourflag.plan.NoDoneTaskFragment
 import com.mdove.ourflag.plan.viewmodel.ShortPlanViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import com.mdove.ourflag.R
 
 class MainActivity : AbsActivity() {
     private lateinit var viewModel: ShortPlanViewModel
