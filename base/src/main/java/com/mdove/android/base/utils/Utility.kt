@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.util.TypedValue
 import android.view.Gravity
@@ -24,16 +25,11 @@ import java.io.OutputStream
 /**
  * Created by MDove on 2019/4/21.
  */
-
-
-fun Int.dpToPx(context: Context) = TypedValue.applyDimension(
-    TypedValue.COMPLEX_UNIT_DIP,
-    this.toFloat(),
-    context.resources.displayMetrics
-)
-
-fun Float.dpToPx(context: Context) =
-    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, context.resources.displayMetrics)
+fun Fragment.assemble(bundle: Bundle?) {
+    bundle?.let {
+        arguments = it
+    }
+}
 
 /**
  * T can be Array but can not be Collection
@@ -49,7 +45,7 @@ fun Any.toJsonObj() = JSONObject(this.toJson())
 fun CharSequence.toJsonObj() = JSONObject(this.toString())
 
 inline fun <reified T : Any> fromJson(json: JSONObject) =
-    GsonProvider.defaultGson.fromJson(json.toString(), T::class.java)
+        GsonProvider.defaultGson.fromJson(json.toString(), T::class.java)
 
 fun Collection<JSONObject>.toJsonArray(): JSONArray {
     val ja = JSONArray()
@@ -70,16 +66,16 @@ fun LongArray.toJsonArray(): JSONArray {
 }
 
 fun InputStream.copyToAsync(out: OutputStream, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
-    GlobalScope.async(MDoveCommonPool) {
-        val l = copyTo(out, bufferSize)
-        l
-    }
+        GlobalScope.async(MDoveCommonPool) {
+            val l = copyTo(out, bufferSize)
+            l
+        }
 
 fun InputStream.copyToAsync(out: File, bufferSize: Int = DEFAULT_BUFFER_SIZE) =
-    GlobalScope.async(MDoveCommonPool) {
-        val l = copyTo(FileOutputStream(out), bufferSize)
-        l
-    }
+        GlobalScope.async(MDoveCommonPool) {
+            val l = copyTo(FileOutputStream(out), bufferSize)
+            l
+        }
 
 /**
  * @param i Intent
@@ -138,11 +134,11 @@ private fun Fragment.tryStartActivityForResult(intent: Intent, requestCode: Int)
  */
 @JvmOverloads
 fun Fragment.safeStartAct(
-    i: Intent,
-    requestCode: Int = 0,
-    useFirstPackage: Boolean = false,
-    forceShowChooser: Boolean = false,
-    chooserTitle: String = ""
+        i: Intent,
+        requestCode: Int = 0,
+        useFirstPackage: Boolean = false,
+        forceShowChooser: Boolean = false,
+        chooserTitle: String = ""
 ): Boolean {
     val pm = context?.packageManager ?: return false
     val r = pm.queryIntentActivities(i, PackageManager.MATCH_DEFAULT_ONLY)

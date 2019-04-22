@@ -60,9 +60,10 @@ androidExtensions {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(":network")
-    implementation project(":service")
-    implementation project(":base")
+    implementation project(path: ':base')
+    implementation project(path: ':network')
+    implementation project(path: ':service')
+    implementation project(path: ':uilib')
 
     Map<String, String> dependencies = rootProject.ext.dependencies
     implementation dependencies.androidx.appCompat

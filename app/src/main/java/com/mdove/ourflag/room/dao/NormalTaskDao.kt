@@ -6,19 +6,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.mdove.ourflag.room.table.NormalTaskBean
 import com.mdove.ourflag.room.table.ShortPlanBean
 
 @Dao
-interface ShortPlanDao {
+interface NormalTaskDao {
     @WorkerThread
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(state: ShortPlanBean): Long?
+    fun insert(value: NormalTaskBean): Long?
 
-    @Query("SELECT * FROM short_plan_table WHERE id = :id")
-    fun getShortPlanBean(id: Long): LiveData<ShortPlanBean>
+    @Query("SELECT * FROM normal_task_table WHERE id = :id")
+    fun getNormalTaskBean(id: Long): LiveData<NormalTaskBean>
 
-    @Query("SELECT * FROM short_plan_table ORDER BY create_time ASC")
-    fun getAllShortPlanBean(): LiveData<List<ShortPlanBean>>
+    @Query("SELECT * FROM normal_task_table WHERE done = 1 ORDER BY create_time ASC")
+    fun getAllNoDoneNormalTaskBean(): LiveData<List<NormalTaskBean>>
 
     @Query("DELETE FROM short_plan_table")
     fun deleteAll()

@@ -7,6 +7,8 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
 
+
+
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
@@ -24,19 +26,19 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':service')
-    implementation project(path: ':base')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     Map<String, String> dependencies = rootProject.ext.dependencies
+    implementation dependencies.androidx.appCompat
+    implementation dependencies.androidx.constraintLayout
+    implementation dependencies.androidx.cardView
+    implementation dependencies.androidx.recyclerView
+    implementation dependencies.androidx.legacy_v4
+    implementation dependencies.design
+
     implementation dependencies.kotlin.core
     implementation dependencies.kotlin.ktx
     implementation dependencies.kotlin.coroutines
     implementation dependencies.kotlin.coroutines_android
-
-    implementation dependencies.arch.lifecycle_extensions
-    implementation dependencies.arch.lifecycle_java8
-
-    implementation dependencies.retrofit
-    implementation dependencies.retrofitConverterGson
-    implementation dependencies.retrofitAdapter2RxJava
+    implementation project(path: ':base')
 }

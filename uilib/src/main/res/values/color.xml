@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+
+    <color name="black">#000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_30">#4D000000</color>
+
+    <color name="dot_unselect_color">#50ffffff</color>
+    <color name="dot_select_color">#ffffff</color>
+
+    <color name="popup_window_pressed_bg">#999999</color>
+    <color name="circle_shadow_bg">#7fEEEEEE</color>
+    <color name="yellow">#FFA200</color>
+
+    <color name="indicator_end_color">#000000</color>
+    <color name="indicator_start_color">#80000000</color>
+
+</resources>

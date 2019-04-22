@@ -1,1 +1,1 @@
-include ':app', ':network', ':service', ':base'
+include ':app', ':network', ':service', ':base', ':uilib'

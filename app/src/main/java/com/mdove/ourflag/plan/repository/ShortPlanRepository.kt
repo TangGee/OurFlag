@@ -1,7 +1,7 @@
 package com.mdove.ourflag.plan.repository
 
-import androidx.lifecycle.LiveData
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import com.mdove.ourflag.room.dao.ShortPlanDao
 import com.mdove.ourflag.room.table.ShortPlanBean
 

@@ -1,19 +1,13 @@
 package com.mdove.ourflag
 
-import android.app.Application
-import com.mdove.android.base.toast.ToastUtil
-import com.mdove.ourflag.service.AppExecutorsImpl
-import com.mdove.android.service.MDoveServiceManager
+import com.mdove.android.base.AbsApplication
 
 /**
  * Created by MDove on 2019/4/21.
  */
-class App : Application() {
+class App : AbsApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        ToastUtil.init(this)
-
-        MDoveServiceManager.appExcutors = AppExecutorsImpl.inst
     }
 }
