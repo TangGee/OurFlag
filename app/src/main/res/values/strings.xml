@@ -3,4 +3,5 @@
 
     <string name="string_title_no_done_task_fragment">未完成任务</string>
     <string name="string_title_today_task_fragment">日常任务</string>
+    <string name="btn_string_add_task">自定义任务</string>
 </resources>

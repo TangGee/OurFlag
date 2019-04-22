@@ -64,7 +64,7 @@ class MainActivity : AbsActivity() {
             }
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                if (positionOffset > 0.0f && !pageSelected) {//略微复杂一点，并且0要排除，走tab select时机
+                if (positionOffset > 0.0f && !pageSelected) {
                     tabs.gradualColor(view_pager.currentItem, view_pager.scrollNextPosition(position),
                             evaluator.calculateGradualColor(positionOffset, selectedColor, unSelectedColor),
                             evaluator.calculateGradualColor(positionOffset, unSelectedColor, selectedColor))

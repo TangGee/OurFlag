@@ -72,6 +72,7 @@ dependencies {
     implementation dependencies.androidx.recyclerView
     implementation dependencies.androidx.legacy_v4
     implementation dependencies.design
+    implementation dependencies.multitype
 
     implementation dependencies.kotlin.core
     implementation dependencies.kotlin.ktx

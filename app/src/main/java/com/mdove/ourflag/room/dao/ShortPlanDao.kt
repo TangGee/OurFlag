@@ -17,7 +17,7 @@ interface ShortPlanDao {
     @Query("SELECT * FROM short_plan_table WHERE id = :id")
     fun getShortPlanBean(id: Long): LiveData<ShortPlanBean>
 
-    @Query("SELECT * FROM short_plan_table ORDER BY create_time ASC")
+    @Query("SELECT * FROM short_plan_table ORDER BY create_time DESC")
     fun getAllShortPlanBean(): LiveData<List<ShortPlanBean>>
 
     @Query("DELETE FROM short_plan_table")

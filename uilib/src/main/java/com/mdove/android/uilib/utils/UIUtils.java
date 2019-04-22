@@ -44,6 +44,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.ViewCompat;
 
+/**
+ * Created by MDove on 2019/4/22.
+ */
 public class UIUtils {
 
     public static final int LAYOUT_PARAMS_KEEP_OLD = -3;

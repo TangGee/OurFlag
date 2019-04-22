@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.mdove.ourflag.room.dao.NormalTaskDao
 import com.mdove.ourflag.room.dao.ShortPlanDao
+import com.mdove.ourflag.room.table.NormalTaskBean
 import com.mdove.ourflag.room.table.ShortPlanBean
 
-@Database(entities = [ShortPlanBean::class], version = 1)
-abstract class OurFlagDatabase: RoomDatabase() {
+@Database(entities = [ShortPlanBean::class, NormalTaskBean::class], version = 1)
+abstract class OurFlagDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: OurFlagDatabase? = null
@@ -31,4 +33,5 @@ abstract class OurFlagDatabase: RoomDatabase() {
     }
 
     abstract fun shortPlanDao(): ShortPlanDao
+    abstract fun normalTaskDao(): NormalTaskDao
 }

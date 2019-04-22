@@ -10,3 +10,13 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class BaseDifficulty(@SerializedName("level_tag") val levelTag: String,
                           @SerializedName("level") val level: Int) : Parcelable
+
+fun initLevel(level: Int):BaseDifficulty{
+    return when(level){
+        1 -> BaseDifficulty("简单",1)
+        2 -> BaseDifficulty("困难",2)
+        3 -> BaseDifficulty("地狱",3)
+        4 -> BaseDifficulty("深渊",4)
+        else -> BaseDifficulty("深渊",4)
+    }
+}
