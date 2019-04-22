@@ -1,7 +1,7 @@
 package com.mdove.ourflag.base
 
 import androidx.appcompat.app.AppCompatActivity
-import com.mdove.ourflag.utils.coroutines.JobHandler
+import com.mdove.android.base.coroutines.JobHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 

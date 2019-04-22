@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import com.mdove.ourflag.plan.repository.ShortPlanRepository
 import com.mdove.ourflag.room.OurFlagDatabase
 import com.mdove.ourflag.room.table.ShortPlanBean
-import com.mdove.ourflag.utils.coroutines.contextJob
-import com.mdove.ourflag.utils.network.FastMain
-import com.mdove.ourflag.utils.network.MDoveCommonPool
+import com.mdove.android.base.coroutines.contextJob
+import com.mdove.android.base.network.threadpool.FastMain
+import com.mdove.android.base.network.threadpool.MDoveCommonPool
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

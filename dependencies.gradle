@@ -43,6 +43,8 @@ ext {
             'retrofitAdapter2RxJava': 'com.squareup.retrofit2:adapter-rxjava2:2.2.0',
             'rxAndroid'             : 'io.reactivex.rxjava2:rxandroid:2.0.1',
             'rxJava'                : 'io.reactivex.rxjava2:rxjava:2.1.0',
+            'okhttp3'        : 'com.squareup.okhttp3:okhttp:3.2.0',
+            'gson'           : 'com.google.code.gson:gson:2.7',
 
             'dagger'                : [
                     'core'     : "com.google.dagger:dagger:$dagger",
@@ -68,6 +70,7 @@ ext {
             'rxBus'                 : 'com.hwangjr.rxbus:rxbus:1.0.4',
             'kotlin'                : [
                     'core'              : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
+                    'core_stdlib_jdk7'              : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}",
                     'coroutines'        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutines}",
                     'ktx'               : "androidx.core:core-ktx:${ktx}",
                     'coroutines_android': "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutines}"

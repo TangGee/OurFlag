@@ -37,10 +37,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode getVersionCodeProperty()
         versionName getVersionNameProperty()
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
-
     }
     buildTypes {
         release {
@@ -61,10 +59,10 @@ androidExtensions {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
 
     implementation project(":network")
     implementation project(":service")
+    implementation project(":base")
 
     Map<String, String> dependencies = rootProject.ext.dependencies
     implementation dependencies.androidx.appCompat
@@ -73,10 +71,6 @@ dependencies {
     implementation dependencies.androidx.recyclerView
     implementation dependencies.androidx.legacy_v4
     implementation dependencies.design
-
-    implementation dependencies.retrofit
-    implementation dependencies.retrofitConverterGson
-    implementation dependencies.retrofitAdapter2RxJava
 
     implementation dependencies.kotlin.core
     implementation dependencies.kotlin.ktx
@@ -87,5 +81,7 @@ dependencies {
     implementation dependencies.arch.lifecycle_java8
     implementation dependencies.room.runtime
     kapt dependencies.room.compiler
+
+    implementation dependencies.gson
 
 }

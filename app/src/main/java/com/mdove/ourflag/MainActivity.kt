@@ -8,7 +8,7 @@ import com.mdove.ourflag.base.AbsActivity
 import com.mdove.ourflag.plan.ShortPlan
 import com.mdove.ourflag.plan.viewmodel.ShortPlanViewModel
 import com.mdove.ourflag.room.table.ShortPlanBean
-import com.mdove.ourflag.utils.toast.ToastUtil
+import com.mdove.android.base.toast.ToastUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AbsActivity() {
