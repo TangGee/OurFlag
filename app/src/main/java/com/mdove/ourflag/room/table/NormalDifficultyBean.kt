@@ -4,17 +4,18 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.mdove.ourflag.plan.bean.BaseDifficulty
 import com.mdove.ourflag.plan.bean.BaseReward
 import com.mdove.ourflag.plan.bean.ExtraReward
 import com.mdove.ourflag.room.converter.ExtralConverter
 import com.mdove.ourflag.room.converter.NormalBeanConverter
 
 /**
- * Created by MDove on 2019/4/22.
+ * Created by MDove on 2019/4/23.
  */
-@Entity(tableName = "normal_reward_table")
+@Entity(tableName = "normal_difficulty_table")
 @TypeConverters(value = [NormalBeanConverter::class, ExtralConverter::class])
-class NormalRewardBean(@PrimaryKey(autoGenerate = true)
-                       @ColumnInfo(name = "id") var id: Long = 0,
-                       @ColumnInfo(name = "normal_reward") val normalReward: BaseReward,
-                       @ColumnInfo(name = "extra_reward") val extraReward: ExtraReward)
+class NormalDifficultyBean(@PrimaryKey(autoGenerate = true)
+                           @ColumnInfo(name = "id") var id: Long = 0,
+                           @ColumnInfo(name = "normal_reward") val normalReward: BaseDifficulty,
+                           @ColumnInfo(name = "extra_reward") val extraReward: ExtraReward)

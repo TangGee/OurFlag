@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.mdove.ourflag.room.dao.NormalDifficultyDao
+import com.mdove.ourflag.room.dao.NormalRewardDao
 import com.mdove.ourflag.room.dao.NormalTaskDao
 import com.mdove.ourflag.room.dao.ShortPlanDao
 import com.mdove.ourflag.room.table.NormalTaskBean
@@ -34,4 +36,6 @@ abstract class OurFlagDatabase : RoomDatabase() {
 
     abstract fun shortPlanDao(): ShortPlanDao
     abstract fun normalTaskDao(): NormalTaskDao
+    abstract fun normalRewardDao(): NormalRewardDao
+    abstract fun normalDifficultyDao(): NormalDifficultyDao
 }
