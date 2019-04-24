@@ -4,31 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mdove.android.base.init.getViewFromPool
+import com.mdove.android.base.toast.ToastUtil
 import com.mdove.android.base.utils.assemble
 import com.mdove.ourflag.R
 import com.mdove.ourflag.plan.adapter.NoDoneTaskAdapter
+import com.mdove.ourflag.plan.adapter.NormalTaskAdapter
+import com.mdove.ourflag.plan.adapter.ReceiveTodayTaskAdapter
 import com.mdove.ourflag.plan.bean.toNormalTaskBean
 import com.mdove.ourflag.plan.depends.ITaskPanelDepends
 import com.mdove.ourflag.plan.viewmodel.NormalTaskViewModel
 import kotlinx.android.synthetic.main.fragment_no_done_task.*
 
 /**
- * Created by MDove on 2019/4/22.
+ * Created by MDove on 2019/4/24.
  */
-class NoDoneTaskFragment : Fragment() {
+class ReceiveTodayTaskFragment : Fragment() {
     private lateinit var mViewModel: NormalTaskViewModel
-    private lateinit var adapter: NoDoneTaskAdapter
+    private lateinit var adapter: ReceiveTodayTaskAdapter
 
     companion object {
-        const val ADD_TASK_FRAGMENT_TAG = "add_task_fragment_tag"
-
-        fun instance(bundle: Bundle?): NoDoneTaskFragment {
-            val fragment = NoDoneTaskFragment()
+        fun instance(bundle: Bundle?): ReceiveTodayTaskFragment {
+            val fragment = ReceiveTodayTaskFragment()
             fragment.assemble(bundle)
             return fragment
         }
@@ -42,12 +44,12 @@ class NoDoneTaskFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return getViewFromPool(R.layout.fragment_no_done_task, container, context)
+        return getViewFromPool(R.layout.fragment_receive_today_task, container, context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = NoDoneTaskAdapter({ startAddTask() }, { taskItem ->
+        adapter = ReceiveTodayTaskAdapter({ startAddTask() }, { taskItem ->
             mViewModel.completeTask(taskItem.toNormalTaskBean())
         })
         rlv.layoutManager = LinearLayoutManager(activity)
@@ -55,9 +57,10 @@ class NoDoneTaskFragment : Fragment() {
         mViewModel.normalTaskItemBeans.observe(this, Observer { data ->
             adapter.updateData(data)
         })
-//        mViewModel.completeStatus.observe(this, Observer {
-//            ToastUtil.toast(it.toast, Toast.LENGTH_SHORT)
-//        })
+
+        mViewModel.completeStatus.observe(this, Observer {
+            ToastUtil.toast(it.toast, Toast.LENGTH_SHORT)
+        })
     }
 
     private fun startAddTask() {

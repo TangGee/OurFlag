@@ -16,9 +16,12 @@ import com.mdove.ourflag.base.AbsActivity
 import com.mdove.ourflag.plan.NoDoneTaskFragment
 import com.mdove.ourflag.plan.viewmodel.ShortPlanViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import com.mdove.ourflag.R
+import com.mdove.ourflag.plan.PanelAddTaskFragment
+import com.mdove.ourflag.plan.ReceiveTodayTaskFragment
+import com.mdove.ourflag.plan.TodayTaskFragment
+import com.mdove.ourflag.plan.depends.ITaskPanelDepends
 
-class MainActivity : AbsActivity() {
+class MainActivity : AbsActivity(), ITaskPanelDepends {
     private lateinit var viewModel: ShortPlanViewModel
     private lateinit var DEFAULT_TITILES: ArrayList<String>
     @SuppressLint("RestrictedApi")
@@ -28,8 +31,9 @@ class MainActivity : AbsActivity() {
     private var unSelectedColor: Int = 0
 
     companion object {
-        const val CHANNEL_INDEX_NO_TASK = 0
-        const val CHANNEL_INDEX_TODAY_TASK = 1
+        const val CHANNEL_INDEX_TODAY_ALL_TASK = 0
+        const val CHANNEL_INDEX_NO_TASK = 1
+        const val CHANNEL_INDEX_RECEIVE_TODAY_TASK = 2
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,12 +44,12 @@ class MainActivity : AbsActivity() {
 
         if (savedInstanceState == null) {
             initViewPager()
-            initTablayout()
+            initTabLayout()
         }
     }
 
     private fun initData() {
-        DEFAULT_TITILES = arrayListOf(getString(R.string.string_title_no_done_task_fragment),
+        DEFAULT_TITILES = arrayListOf(getString(R.string.string_title_today_all_task_fragment), getString(R.string.string_title_no_done_task_fragment),
                 getString(R.string.string_title_today_task_fragment))
         DEFAULT_INDICATOR_COLORS = arrayListOf(ContextCompat.getColor(this, R.color.indicator_start_color), ContextCompat.getColor(this, R.color.indicator_end_color))
 
@@ -76,7 +80,27 @@ class MainActivity : AbsActivity() {
         view_pager?.addOnPageChangeListener(pageChangeListener)
     }
 
-    private fun initTablayout() {
+    override fun addTaskPanel() {
+        if (supportFragmentManager.findFragmentByTag(NoDoneTaskFragment.ADD_TASK_FRAGMENT_TAG) == null) {
+            supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_bottom, R.anim.slide_in_bottom, R.anim.slide_out_bottom)
+                    .replace(
+                            R.id.layout_panel,
+                            PanelAddTaskFragment(),
+                            NoDoneTaskFragment.ADD_TASK_FRAGMENT_TAG
+                    )
+                    .addToBackStack(NoDoneTaskFragment.ADD_TASK_FRAGMENT_TAG)
+                    .commitAllowingStateLoss()
+        }
+    }
+
+    override fun popTopFragment() {
+        if (supportFragmentManager.backStackEntryCount >= 1) {
+            supportFragmentManager.popBackStack()
+        }
+    }
+
+    private fun initTabLayout() {
         val colors = mutableListOf<Int>()
         view_pager?.adapter?.let { it_ ->
             (0 until it_.count).forEach { index ->
@@ -86,14 +110,17 @@ class MainActivity : AbsActivity() {
         tabs.setViewPager(view_pager, DEFAULT_TITILES, DEFAULT_INDICATOR_COLORS)
     }
 
-    class ViewPagerAdapter(val categoryList: List<String>, private val fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    class ViewPagerAdapter(val categoryList: List<String>, fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 CHANNEL_INDEX_NO_TASK -> {
                     NoDoneTaskFragment.instance(null)
                 }
-                CHANNEL_INDEX_TODAY_TASK -> {
-                    NoDoneTaskFragment.instance(null)
+                CHANNEL_INDEX_RECEIVE_TODAY_TASK -> {
+                    ReceiveTodayTaskFragment.instance(null)
+                }
+                CHANNEL_INDEX_TODAY_ALL_TASK -> {
+                    TodayTaskFragment.instance(null)
                 }
                 else -> throw Exception("Index out of bound")
             }

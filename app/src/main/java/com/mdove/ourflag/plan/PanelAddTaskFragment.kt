@@ -11,7 +11,8 @@ import com.mdove.android.base.utils.DateUtils
 import com.mdove.ourflag.R
 import com.mdove.ourflag.plan.bean.BaseTask
 import com.mdove.ourflag.plan.bean.NormalTask
-import com.mdove.ourflag.plan.viewmodel.NoDoneTaskViewModel
+import com.mdove.ourflag.plan.depends.ITaskPanelDepends
+import com.mdove.ourflag.plan.viewmodel.NormalTaskViewModel
 import com.mdove.ourflag.room.table.NormalTaskBean
 import kotlinx.android.synthetic.main.fragment_panel_add_task.*
 
@@ -19,12 +20,12 @@ import kotlinx.android.synthetic.main.fragment_panel_add_task.*
  * Created by MDove on 2019/4/22.
  */
 class PanelAddTaskFragment : Fragment() {
-    private lateinit var noDoneViewModel: NoDoneTaskViewModel
+    private lateinit var mNormalViewModel: NormalTaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.let {
-            noDoneViewModel = ViewModelProviders.of(it).get(NoDoneTaskViewModel::class.java)
+            mNormalViewModel = ViewModelProviders.of(it).get(NormalTaskViewModel::class.java)
         }
     }
 
@@ -35,7 +36,13 @@ class PanelAddTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_add.setOnClickListener {
-            noDoneViewModel.insertNormalTask(NormalTaskBean(normalTask = NormalTask(baseTask = BaseTask("Test", et_title.text.toString(), et_content.text.toString(), completeTime = DateUtils.getTimes(24, 20, 0)))))
+            mNormalViewModel.insertNormalTask(NormalTaskBean(normalTask = NormalTask(baseTask = BaseTask("Test", et_title.text.toString(), et_content.text.toString(), completeTime = DateUtils.getTimes(24, 20, 0)))))
+        }
+
+        drag_root.exitInvoke = {
+            (activity as? ITaskPanelDepends)?.let {
+                it.popTopFragment()
+            }
         }
     }
 }

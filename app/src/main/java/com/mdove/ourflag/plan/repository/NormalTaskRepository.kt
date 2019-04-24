@@ -16,8 +16,19 @@ import com.mdove.ourflag.room.table.ShortPlanBean
 /**
  * Created by MDove on 2019/4/22.
  */
-class NoDoneTaskRepository(private val normalTaskDao: NormalTaskDao) {
+class NormalTaskRepository(private val normalTaskDao: NormalTaskDao) {
     val allNoDoneTask: LiveData<List<BaseTaskListItem>> = Transformations.switchMap(normalTaskDao.getAllNoDoneNormalTaskBean()) {
+        val liveData = MutableLiveData<List<BaseTaskListItem>>()
+        val data = mutableListOf<BaseTaskListItem>()
+        data.add(0, AddTaskItemBean)
+        it.map {first->
+            data.add(first.toNormalTaskItemBean())
+        }
+        liveData.postValue(data)
+        liveData
+    }
+
+    val allTask: LiveData<List<BaseTaskListItem>> = Transformations.switchMap(normalTaskDao.getAllNormalTaskBean()) {
         val liveData = MutableLiveData<List<BaseTaskListItem>>()
         val data = mutableListOf<BaseTaskListItem>()
         data.add(0, AddTaskItemBean)

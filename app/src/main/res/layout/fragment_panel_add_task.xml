@@ -3,12 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drag_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black_30">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:background="@drawable/bg_panel_add_task">
 
@@ -31,6 +30,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
+            android:gravity="left|top"
             android:background="@drawable/bg_panel_et"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btn_add"
@@ -52,6 +52,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="15dp"
+            android:gravity="left|top"
             android:background="@drawable/bg_panel_et"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

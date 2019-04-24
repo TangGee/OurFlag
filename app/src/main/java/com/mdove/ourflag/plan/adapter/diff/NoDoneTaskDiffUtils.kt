@@ -43,6 +43,8 @@ class NoDoneTaskDiffUtils : DiffUtil.Callback() {
         val oldItem = oldData[oldItemPosition]
         val newItem = data[newItemPosition]
         return if (oldItem is NormalTaskItemBean && newItem is NormalTaskItemBean) {
+            oldItem.done == newItem.done
+        } else if (oldItem is NormalTaskItemBean && newItem is NormalTaskItemBean) {
             oldItem.normalTask.baseTask.content == newItem.normalTask.baseTask.content
         } else {
             true

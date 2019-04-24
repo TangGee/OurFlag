@@ -18,6 +18,10 @@ interface NormalTaskDao {
     @Query("SELECT * FROM normal_task_table WHERE id = :id")
     fun getNormalTaskBean(id: Long): LiveData<NormalTaskBean>
 
+    @Query("SELECT * FROM normal_task_table ORDER BY create_time DESC")
+    fun getAllNormalTaskBean(): LiveData<List<NormalTaskBean>>
+
+
     @Query("SELECT * FROM normal_task_table WHERE done = 1 ORDER BY create_time DESC")
     fun getAllNoDoneNormalTaskBean(): LiveData<List<NormalTaskBean>>
 
