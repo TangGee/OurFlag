@@ -15,5 +15,5 @@ import com.mdove.ourflag.room.converter.NormalBeanConverter
 class NormalTaskBean(@PrimaryKey(autoGenerate = true)
                      @ColumnInfo(name = "id") var id: Long = 0,
                      @ColumnInfo(name = "create_time") val createTime: Long = System.currentTimeMillis(),
-                     @ColumnInfo(name = "done") val done: Int = 1,//0表示完成
+                     @ColumnInfo(name = "done") var done: Int = 1,//0表示完成
                      @ColumnInfo(name = "normal_task") val normalTask: NormalTask)

@@ -10,5 +10,4 @@ import kotlin.random.Random
  */
 @Parcelize
 data class NormalTask(@SerializedName("base_task") val baseTask: BaseTask,
-                      @SerializedName("base_reward") val baseReward: BaseReward = BaseReward(),
-                      @SerializedName("base_difficulty") val baseDifficulty: BaseDifficulty = initLevel(Random.nextInt(3) + 1)) : Parcelable
+                      @SerializedName("normal_reward") val normalReward: NormalReward = NormalReward(level = Random.nextInt(3) + 1)) : Parcelable

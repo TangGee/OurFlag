@@ -6,9 +6,9 @@ import com.mdove.ourflag.room.table.NormalTaskBean
 /**
  * Created by MDove on 2019/4/22.
  */
-sealed class BaseTaskListItem
+sealed class BaseTaskListItem(val isRealBean: Boolean = true)
 
-object AddTaskItemBean : BaseTaskListItem()
+object AddTaskItemBean : BaseTaskListItem(false)
 
 data class NormalTaskItemBean(@SerializedName("id") val id: Long,
                               @SerializedName("create_time") val createTime: Long,
@@ -17,4 +17,8 @@ data class NormalTaskItemBean(@SerializedName("id") val id: Long,
 
 fun NormalTaskBean.toNormalTaskItemBean(): NormalTaskItemBean {
     return NormalTaskItemBean(id = id, createTime = this.createTime, done = this.done, normalTask = this.normalTask)
+}
+
+fun NormalTaskItemBean.toNormalTaskBean(): NormalTaskBean {
+    return NormalTaskBean(id = id, createTime = this.createTime, done = this.done, normalTask = this.normalTask)
 }

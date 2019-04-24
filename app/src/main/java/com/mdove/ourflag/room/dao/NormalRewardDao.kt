@@ -20,7 +20,7 @@ interface NormalRewardDao {
     fun getAll(): LiveData<NormalRewardBean>
 
     @Query("SELECT * FROM normal_reward_table WHERE id = :id")
-    fun getNormalTaskBean(id: Long): LiveData<NormalRewardBean>
+    fun getNormalRewardBean(id: Long): LiveData<NormalRewardBean>
 
     @Query("DELETE FROM normal_reward_table")
     fun deleteAll()

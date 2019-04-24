@@ -32,4 +32,9 @@ class NoDoneTaskRepository(private val normalTaskDao: NormalTaskDao) {
     suspend fun insertNormalTask(normalTaskBean: NormalTaskBean) {
         normalTaskDao.insert(normalTaskBean)
     }
+
+    @WorkerThread
+    suspend fun updateNormalTask(normalTaskBean: NormalTaskBean) {
+        normalTaskDao.update(normalTaskBean)
+    }
 }

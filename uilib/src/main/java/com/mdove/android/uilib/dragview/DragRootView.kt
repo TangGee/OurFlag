@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import androidx.core.view.ViewCompat
 import androidx.customview.widget.ViewDragHelper
@@ -16,7 +17,7 @@ import com.mdove.android.uilib.utils.UIUtils
 /**
  * Created by MDove on 2019/4/2.
  */
-class DragRootView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : RelativeLayout(context, attrs) {
+class DragRootView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : FrameLayout(context, attrs) {
 
     private var innerRlvs: MutableList<RecyclerView> = mutableListOf()
     private var mDownTime: Long = 0

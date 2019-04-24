@@ -10,4 +10,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class BaseTask(@SerializedName("tag") val tag: String,
                     @SerializedName("title") val title: String?,
-                    @SerializedName("content") val content: String) : Parcelable
+                    @SerializedName("content") val content: String,
+                    @SerializedName("complete_time") val completeTime: Long) : Parcelable

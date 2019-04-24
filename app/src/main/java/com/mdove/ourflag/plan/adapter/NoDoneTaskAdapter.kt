@@ -12,9 +12,9 @@ import me.drakeet.multitype.MultiTypeAdapter
 /**
  * Created by MDove on 2019/4/22.
  */
-class NoDoneTaskAdapter(click: () -> Unit) : MultiTypeAdapter() {
-    private val addTaskItemBinder = AddTaskItemBinder(click)
-    private val noDoneNormalTaskItemBinder = NoDoneTaskNormalItemBinder()
+class NoDoneTaskAdapter(clickTopOption: () -> Unit, itemClick: (taskBean:NormalTaskItemBean) -> Unit) : MultiTypeAdapter() {
+    private val addTaskItemBinder = AddTaskItemBinder(clickTopOption)
+    private val noDoneNormalTaskItemBinder = NoDoneTaskNormalItemBinder(itemClick)
     private val diffCallback = NoDoneTaskDiffUtils()
 
     init {

@@ -12,10 +12,8 @@ import com.mdove.android.base.init.getViewFromPool
 import com.mdove.android.base.utils.assemble
 import com.mdove.ourflag.R
 import com.mdove.ourflag.plan.adapter.NoDoneTaskAdapter
-import com.mdove.ourflag.plan.bean.BaseTask
-import com.mdove.ourflag.plan.bean.NormalTask
+import com.mdove.ourflag.plan.bean.toNormalTaskBean
 import com.mdove.ourflag.plan.viewmodel.NoDoneTaskViewModel
-import com.mdove.ourflag.room.table.NormalTaskBean
 import kotlinx.android.synthetic.main.fragment_no_done_task.*
 
 /**
@@ -26,6 +24,8 @@ class NoDoneTaskFragment : Fragment() {
     private lateinit var adapter: NoDoneTaskAdapter
 
     companion object {
+        const val ADD_TASK_FRAGMENT_TAG = "add_task_fragment_tag"
+
         fun instance(bundle: Bundle?): NoDoneTaskFragment {
             val fragment = NoDoneTaskFragment()
             fragment.assemble(bundle)
@@ -46,14 +46,38 @@ class NoDoneTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = NoDoneTaskAdapter {
-            val time=java.lang.Long.toHexString(System.currentTimeMillis())
-            viewModel.insertNormalTask(NormalTaskBean(normalTask = NormalTask(baseTask = BaseTask("哈哈$time", "呵呵$time", "嘿嘿$time"))))
-        }
+        adapter = NoDoneTaskAdapter({ startAddTask() }, { taskItem ->
+            viewModel.completeTask(taskItem.toNormalTaskBean())
+        })
         rlv.layoutManager = LinearLayoutManager(activity)
         rlv.adapter = adapter
         viewModel.normalTaskItemBeans.observe(this, Observer { data ->
             adapter.updateData(data)
         })
+//        viewModel.completeStatus.observe(this, Observer {
+//            ToastUtil.toast(it.toast, Toast.LENGTH_SHORT)
+//        })
+    }
+
+    private fun startAddTask() {
+        activity?.let {
+            if (it.supportFragmentManager.findFragmentByTag(ADD_TASK_FRAGMENT_TAG) == null) {
+                it.supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.dim_in, R.anim.dim_out, R.anim.dim_in, R.anim.dim_out)
+                        .replace(
+                                R.id.root_layout,
+                                PanelAddTaskFragment(),
+                                ADD_TASK_FRAGMENT_TAG
+                        )
+                        .addToBackStack(ADD_TASK_FRAGMENT_TAG)
+                        .commitAllowingStateLoss()
+            }
+        }
+    }
+
+    private fun popAddTaskFragment() {
+        activity?.let {
+            it.supportFragmentManager.popBackStack()
+        }
     }
 }

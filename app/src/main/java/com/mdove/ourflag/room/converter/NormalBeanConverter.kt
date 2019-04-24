@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.mdove.android.base.gson.GsonProvider
 import com.mdove.ourflag.plan.bean.BaseDifficulty
 import com.mdove.ourflag.plan.bean.BaseReward
+import com.mdove.ourflag.plan.bean.NormalReward
 import com.mdove.ourflag.plan.bean.NormalTask
 
 /**
@@ -28,6 +29,17 @@ class NormalBeanConverter {
 
     @TypeConverter
     fun fromBaseReward(value: BaseReward): String {
+        return GsonProvider.defaultGson.toJson(value)
+    }
+
+    // NormalReward
+    @TypeConverter
+    fun toNormalReward(value: String): NormalReward {
+        return GsonProvider.defaultGson.fromJson(value, NormalReward::class.java)
+    }
+
+    @TypeConverter
+    fun fromNormalReward(value: NormalReward): String {
         return GsonProvider.defaultGson.toJson(value)
     }
 
